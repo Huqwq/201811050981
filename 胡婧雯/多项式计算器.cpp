@@ -1,35 +1,34 @@
-/*
 #include<stdio.h>
 #include<string.h>
 #define MaxSize 100 
  
-typedef struct CharStack				//×Ö·ûÕ» 
+typedef struct CharStack				//å­—ç¬¦æ ˆ 
 {
 	char data[MaxSize];
 	int top;
 }cStack;
  
-typedef struct DoubleStack				//Êı¾İÕ» 
+typedef struct DoubleStack				//æ•°æ®æ ˆ 
 {
 	double data[MaxSize];
 	int top;
 }dStack;
  
-int Isop(char );				//µ±Ç°É¨ÃèÔªËØÓÅÏÈ¼¶ 
-int Inop(char );				//Õ»¶¥ÔªËØÓÅÏÈ¼¶ 
+int Isop(char );				//å½“å‰æ‰«æå…ƒç´ ä¼˜å…ˆçº§ 
+int Inop(char );				//æ ˆé¡¶å…ƒç´ ä¼˜å…ˆçº§ 
  
-void Initc(cStack *);				//³õÊ¼»¯×Ö·ûÕ» 
-int Pushc(cStack *,char);			//×Ö·ûÕ»Ñ¹Õ» 
-char Gettopc(cStack *);				//·µ»ØÕ»¶¥ÔªËØ 
-char Popc(cStack *);				//³öÕ» 
+void Initc(cStack *);				//åˆå§‹åŒ–å­—ç¬¦æ ˆ 
+int Pushc(cStack *,char);			//å­—ç¬¦æ ˆå‹æ ˆ 
+char Gettopc(cStack *);				//è¿”å›æ ˆé¡¶å…ƒç´  
+char Popc(cStack *);				//å‡ºæ ˆ 
  
-void Initd(dStack *);				//³õÊ¼»¯Êı¾İÕ» 
-int Pushd(dStack *,double);			//Êı¾İÑ¹Õ» 
-double Popd(dStack *);				//³öÕ» 
+void Initd(dStack *);				//åˆå§‹åŒ–æ•°æ®æ ˆ 
+int Pushd(dStack *,double);			//æ•°æ®å‹æ ˆ 
+double Popd(dStack *);				//å‡ºæ ˆ 
  
-void Trans(char*s1,char*s2);		        //×ª»¯Îªºó×º±í´ïÊ½ 
+void Trans(char*s1,char*s2);		        //è½¬åŒ–ä¸ºåç¼€è¡¨è¾¾å¼ 
  
-double Calculate(char *s2);			//ºó×º±í´ïÊ½ÇóÖµ 
+double Calculate(char *s2);			//åç¼€è¡¨è¾¾å¼æ±‚å€¼ 
  
  
  
@@ -37,26 +36,26 @@ double Calculate(char *s2);			//ºó×º±í´ïÊ½ÇóÖµ
  
 int main()
 {
-	char s1[MaxSize];			//ÓÃÓÚ´æ´¢Ç°×º±í´ïÊ½ 
-	char s2[MaxSize];			//ÓÃÓÚ´æ´¢×ª»»ºóµÄ±í´ïÊ½ 
-	printf("ÇëÊäÈë±í´ïÊ½:");
+	char s1[MaxSize];			//ç”¨äºå­˜å‚¨å‰ç¼€è¡¨è¾¾å¼ 
+	char s2[MaxSize];			//ç”¨äºå­˜å‚¨è½¬æ¢åçš„è¡¨è¾¾å¼ 
+	printf("è¯·è¾“å…¥è¡¨è¾¾å¼:");
 	scanf("%s",s1);
 	
-	Trans(s1,s2);				//´¦Àí×Ö·û´®£¬²¢×ª»¯Îªºó×º±í´ïÊ½,´æ·ÅÔÚs2ÖĞ 
+	Trans(s1,s2);				//å¤„ç†å­—ç¬¦ä¸²ï¼Œå¹¶è½¬åŒ–ä¸ºåç¼€è¡¨è¾¾å¼,å­˜æ”¾åœ¨s2ä¸­ 
 	
-	printf("¼ÆËã½á¹ûÎª: %f",Calculate(s2));		//ºó×º±í´ïÊ½ÇóÖµ 
+	printf("è®¡ç®—ç»“æœä¸º: %f",Calculate(s2));		//åç¼€è¡¨è¾¾å¼æ±‚å€¼ 
 	
 		
 	return 0;
 }
  
-//³õÊ¼»¯ 
+//åˆå§‹åŒ– 
 void Initc(cStack *s1)
 {
 	s1->top=-1;
 }
  
- //×Ö·ûÕ»Ñ¹Õ» 
+ //å­—ç¬¦æ ˆå‹æ ˆ 
  int Pushc(cStack *c1,char op)
  {
  	if(c1->top<MaxSize)
@@ -67,25 +66,25 @@ void Initc(cStack *s1)
 	else return 0;
 }
  
-//GETÕ»¶¥ÔªËØ 
+//GETæ ˆé¡¶å…ƒç´  
 char Gettopc(cStack *c1)
 {
 	return c1->data[c1->top];
 }
  
-//×Ö·ûÕ»³öÕ» 
+//å­—ç¬¦æ ˆå‡ºæ ˆ 
 char Popc(cStack *c1)
 {
 	return c1->data[c1->top--];
 }
  
-//³õÊ¼»¯Êı¾İÕ» 
+//åˆå§‹åŒ–æ•°æ®æ ˆ 
 void Initd(dStack *d1)
 {
 	d1->top=-1;
 }
  
-//Êı¾İÕ»Ñ¹Õ» 
+//æ•°æ®æ ˆå‹æ ˆ 
 int Pushd(dStack *d1,double data)
 {
 	if(d1->top<MaxSize)
@@ -96,13 +95,13 @@ int Pushd(dStack *d1,double data)
 	else return 0;
 }
  
-//Êı¾İÕ»³öÕ» 
+//æ•°æ®æ ˆå‡ºæ ˆ 
 double Popd(dStack *d1)
 {
 	return d1->data[d1->top--];
 }
  
-int Isop(char op)		//µ±Ç°É¨ÃèÔËËã·ûÓÅÏÈ¼¶
+int Isop(char op)		//å½“å‰æ‰«æè¿ç®—ç¬¦ä¼˜å…ˆçº§
 {
 	switch(op)
 	{
@@ -111,7 +110,7 @@ int Isop(char op)		//µ±Ç°É¨ÃèÔËËã·ûÓÅÏÈ¼¶
 		case '*': case '/': return 4;
 	}
 }
-int Inop(char op)		//µ±Ç°É¨ÃèÔËËã·ûÓÅÏÈ¼¶
+int Inop(char op)		//å½“å‰æ‰«æè¿ç®—ç¬¦ä¼˜å…ˆçº§
 {
 	switch(op)
 	{
@@ -125,14 +124,14 @@ void Trans(char *s1,char *s2)
 {
 	int i=0;
 	int j=0;
-	int flag1=-1;				//flag1Îª0±íÊ¾ÉÏ´ÎÊä³öÎªÊı×Ö£¬flag1Îª1±íÊ¾ÉÏ´ÎÊä³öÎª×Ö·û
-	int flag2=-1; 				//flag2Îª0±íÊ¾ÉÏ´ÎÉ¨ÃèÎªÊı×Ö£¬flagÎª1±íÊ¾ÉÏ´ÎÉ¨ÃèÎªÔËËã·û£¬ÓÃÓÚÇø·ÖÊı×Öºó¼Ó¿Õ¸ñ
-	cStack st1;				//Ôİ·ÅÔËËã·û 
+	int flag1=-1;				//flag1ä¸º0è¡¨ç¤ºä¸Šæ¬¡è¾“å‡ºä¸ºæ•°å­—ï¼Œflag1ä¸º1è¡¨ç¤ºä¸Šæ¬¡è¾“å‡ºä¸ºå­—ç¬¦
+	int flag2=-1; 				//flag2ä¸º0è¡¨ç¤ºä¸Šæ¬¡æ‰«æä¸ºæ•°å­—ï¼Œflagä¸º1è¡¨ç¤ºä¸Šæ¬¡æ‰«æä¸ºè¿ç®—ç¬¦ï¼Œç”¨äºåŒºåˆ†æ•°å­—ååŠ ç©ºæ ¼
+	cStack st1;				//æš‚æ”¾è¿ç®—ç¬¦ 
 	Initc(&st1);
 	
-	while(s1[i]!='\0')			//´¦Àí¸ºÊı 
+	while(s1[i]!='\0')			//å¤„ç†è´Ÿæ•° 
 	{
-		if(s1[0]=='-')			//µÚÒ»Î»Êı×ÖÎª¸ºÊıÊ± 
+		if(s1[0]=='-')			//ç¬¬ä¸€ä½æ•°å­—ä¸ºè´Ÿæ•°æ—¶ 
 		{
 			j=strlen(s1);
 			while(j>0)
@@ -148,7 +147,7 @@ void Trans(char *s1,char *s2)
 			s1[j]='*';
 			
 		}
-		if(s1[i]=='('&&s1[i+1]=='-')	//·ÇµÚÒ»Î»¸ºÊıÊ± 
+		if(s1[i]=='('&&s1[i+1]=='-')	//éç¬¬ä¸€ä½è´Ÿæ•°æ—¶ 
 		{
 			j=strlen(s1);
 			while(j>i+1)
@@ -171,7 +170,7 @@ void Trans(char *s1,char *s2)
 	j=0;
 	while(s1[i]!='\0')
 	{
-		if(flag1==0&&flag2==1)		//ÈôÉÏ´ÎµÄÊä³öÎªÊı×Ö£¬ÉÏ´ÎÑ­»·É¨ÃèÎª×Ö·û£¬Ôò±íÊ¾¸ÃÊı×Ö´®½áÊø£¬ÔòÔÚÊı×Öºó¼Ó¿Õ¸ñÇø·Ö 
+		if(flag1==0&&flag2==1)		//è‹¥ä¸Šæ¬¡çš„è¾“å‡ºä¸ºæ•°å­—ï¼Œä¸Šæ¬¡å¾ªç¯æ‰«æä¸ºå­—ç¬¦ï¼Œåˆ™è¡¨ç¤ºè¯¥æ•°å­—ä¸²ç»“æŸï¼Œåˆ™åœ¨æ•°å­—ååŠ ç©ºæ ¼åŒºåˆ† 
 		{
 			s2[j++]=' ';
 			flag1=1; 
@@ -191,12 +190,12 @@ void Trans(char *s1,char *s2)
 			}
 			else
 			{
-				while(st1.top>=0&&Isop(s1[i])<Inop(Gettopc(&st1)))		//µ±Ç°É¨Ãè×Ö·ûÓÅÏÈ¼¶²»¶ÏÓëÕ»¶¥×Ö·ûÓÅÏÈ¼¶±È½Ï£¬µ±Ç°×Ö·ûĞ¡ÓÚÕ»¶¥×Ö·ûÊ±ÍËÕ»²¢Êä³ö 
+				while(st1.top>=0&&Isop(s1[i])<Inop(Gettopc(&st1)))		//å½“å‰æ‰«æå­—ç¬¦ä¼˜å…ˆçº§ä¸æ–­ä¸æ ˆé¡¶å­—ç¬¦ä¼˜å…ˆçº§æ¯”è¾ƒï¼Œå½“å‰å­—ç¬¦å°äºæ ˆé¡¶å­—ç¬¦æ—¶é€€æ ˆå¹¶è¾“å‡º 
 				{
 						s2[j++]=Popc(&st1);
 						flag1=1;
 				}
-				if(st1.top<0||Isop(s1[i])>Inop(Gettopc(&st1)))			//µ±Ç°×Ö·ûÓÅÏÈ¼¶´óÓÚÕ»¶¥ÓÅÏÈ¼¶»òÕ»¿ÕÊ±µ±Ç°×Ö·ûÑ¹Èë×Ö·ûÕ»ÄÚ 
+				if(st1.top<0||Isop(s1[i])>Inop(Gettopc(&st1)))			//å½“å‰å­—ç¬¦ä¼˜å…ˆçº§å¤§äºæ ˆé¡¶ä¼˜å…ˆçº§æˆ–æ ˆç©ºæ—¶å½“å‰å­—ç¬¦å‹å…¥å­—ç¬¦æ ˆå†… 
 				{
 					Pushc(&st1,s1[i]);
 				}
@@ -206,7 +205,7 @@ void Trans(char *s1,char *s2)
 		else if(s1[i]==')')				 
 		{
 			flag2=1;
-			if(Gettopc(&st1)!='(')		//ÈôÀ¨ºÅ½ö°üº¬Êı×ÖÔòÃ»ÓĞÊä³öÔËËã·û 
+			if(Gettopc(&st1)!='(')		//è‹¥æ‹¬å·ä»…åŒ…å«æ•°å­—åˆ™æ²¡æœ‰è¾“å‡ºè¿ç®—ç¬¦ 
 			{
 				flag1=1;
 			}
@@ -214,29 +213,29 @@ void Trans(char *s1,char *s2)
 			{
 				s2[j++]=Popc(&st1);
 			}
-			Popc(&st1);		//½«'('³öÕ» 
+			Popc(&st1);		//å°†'('å‡ºæ ˆ 
 		}
 		i++;
 	}
-	while(st1.top>=0)		//½«Õ»ÄÚÊ£ÓàµÄÔËËã·ûÒÀ´ÎÍËÕ»Êä³ö 
+	while(st1.top>=0)		//å°†æ ˆå†…å‰©ä½™çš„è¿ç®—ç¬¦ä¾æ¬¡é€€æ ˆè¾“å‡º 
 	{
 		s2[j++]=Popc(&st1);
 	}
 	s2[j]='\0';
 }
  
-//±í´ïÊ½ÇóÖµ 
+//è¡¨è¾¾å¼æ±‚å€¼ 
 double Calculate(char *s1)
 {
 	int i=0;
-	int flag;				//charÀàĞÍ×ª»»ÎªdoubleÀàĞÍÊı¾İ±ê¼Ç 
+	int flag;				//charç±»å‹è½¬æ¢ä¸ºdoubleç±»å‹æ•°æ®æ ‡è®° 
 	double data1,data2;
 	double sum;
 	dStack ds1;
 	Initd(&ds1);
 	while(s1[i]!='\0')
 	{
-		if(s1[i]=='+'||s1[i]=='-'||s1[i]=='*'||s1[i]=='/')			//ÈôÎªÔËËã·û»ñÈ¡Õ»¶¥Á½¸öÔªËØ½øĞĞ¼ÆËã 
+		if(s1[i]=='+'||s1[i]=='-'||s1[i]=='*'||s1[i]=='/')			//è‹¥ä¸ºè¿ç®—ç¬¦è·å–æ ˆé¡¶ä¸¤ä¸ªå…ƒç´ è¿›è¡Œè®¡ç®— 
 		{
 			data1=Popd(&ds1);
 			data2=Popd(&ds1);
@@ -245,14 +244,14 @@ double Calculate(char *s1)
 			else if(s1[i]=='*') Pushd(&ds1,data2*data1);
 			else if(s1[i]=='/') Pushd(&ds1,data2/data1);
 		}
-		else							//ÎªÊı¾İÊ±×ª»¯ÎªdoubleÀàĞÍÑ¹Õ» 
+		else							//ä¸ºæ•°æ®æ—¶è½¬åŒ–ä¸ºdoubleç±»å‹å‹æ ˆ 
 		{
-			flag=0;					//³õÊ¼»¯Îª0ÎªÕûÊı²¿·Ö±ê¼Ç£¬1ÎªĞ¡Êı²¿·Ö±ê¼Ç 
+			flag=0;					//åˆå§‹åŒ–ä¸º0ä¸ºæ•´æ•°éƒ¨åˆ†æ ‡è®°ï¼Œ1ä¸ºå°æ•°éƒ¨åˆ†æ ‡è®° 
 			sum=0;
 			double divider=1;
 			while(s1[i]!=' '&&s1[i]!='+'&&s1[i]!='-'&&s1[i]!='*'&&s1[i]!='/')
 			{
-				if(s1[i]=='.')		//ÈôÓĞĞ¡Êıµã£¬½øÈëĞ¡Êı×ª»¯Ä£Ê½ 
+				if(s1[i]=='.')		//è‹¥æœ‰å°æ•°ç‚¹ï¼Œè¿›å…¥å°æ•°è½¬åŒ–æ¨¡å¼ 
 				{
 					flag=1;
 					i++;
@@ -269,98 +268,11 @@ double Calculate(char *s1)
 				}
 				i++;
 			}
-			if(s1[i]=='+'||s1[i]=='-'||s1[i]=='*'||s1[i]=='/') i--;	//×ª»¯³É¹¦Ò»¸öÊı¾İ£¬ÈôÏÂ¸ö×Ö·ûÎªÔËËã·û£¬Ôòi--£¬»Øµ½µ±Ç°ÔËËãµÄÊı¾İÎ»ÖÃ 
+			if(s1[i]=='+'||s1[i]=='-'||s1[i]=='*'||s1[i]=='/') i--;	//è½¬åŒ–æˆåŠŸä¸€ä¸ªæ•°æ®ï¼Œè‹¥ä¸‹ä¸ªå­—ç¬¦ä¸ºè¿ç®—ç¬¦ï¼Œåˆ™i--ï¼Œå›åˆ°å½“å‰è¿ç®—çš„æ•°æ®ä½ç½® 
 			Pushd(&ds1,sum);
 		}
-		i++;		//i++×¼±¸ÏÂÒ»¸ö×Ö·ûµÄ×ª»» 
+		i++;		//i++å‡†å¤‡ä¸‹ä¸€ä¸ªå­—ç¬¦çš„è½¬æ¢ 
 	}
 	 return Popd(&ds1);
 }
 
-*/
-
-#include <cmath>
-#include <string>
-#include <stdio.h>
-#include <iostream>
-#include <cstring>
-using namespace std;
-#define MAXN 5000
- 
-char c[MAXN], oper[MAXN];
-double number[MAXN];
-int oper_num, num_num, p;
- 
-void work();
-void calc();
-void get_number();
-void get_operator();
-int get_priority(int n);
- 
-int main(){
-    scanf("%s", &c);
-    work();
-    printf("%lf", number[1]);
-    return 0;
-}
- 
-void work(){
-    while (p < strlen(c)){
-	if (c[p] >= '0' && c[p] <= '9') get_number();
-	if (c[p] == '+' || c[p] == '-' || c[p] == '*' 
-            || c[p] == '/' || c[p] == '^') get_operator();
-	if (c[p] == '(') oper[++oper_num] = '(';
-	if (c[p] == ')'){
-	    oper[++oper_num] = ')';
-	    while (oper_num > 1 && oper[oper_num-1] != '(') calc();
-	    oper_num -= 2;
-	}	
-        p++;	
-    }
-    oper[++oper_num] = ')';
-    while (oper_num > 1) calc();	
-}
- 
-void calc(){
-    double res = 1;
-    double a2 = number[num_num--];
-    double a1 = number[num_num];	
-    char handle = oper[--oper_num];
-    oper[oper_num] = oper[oper_num + 1];	
-    if (handle == '+') res = a1 + a2;
-    if (handle == '-') res = a1 - a2;
-    if (handle == '*') res = a1 * a2;
-    if (handle == '/') res = a1 * 1.0 / a2;
-    if (handle == '^') {
-    	for (int i = 1;i <= abs(a2); i++) res = res * a1;
-    	if (a2<0) res = 1.0 / res;//×¢ÒâÃİÎª¸ºÊıµÄÇé¿ö
-    }
-    number[num_num] = res;
-}
- 
-void get_number(){//ÌáÈ¡Êı×Ö£¬×¢ÒâĞ¡ÊıµãµÄ´¦Àí
-    int n = 1, start_p = p;
-    char c_num[MAXN];	
-    while ((c[p] <= '9' && c[p] >= '0') || c[p] == '.') {	
-    	n++;
-    	p++;
-    }
-    strncpy(c_num, c+start_p, n);
-    sscanf(c_num, "%lf", &number[++num_num]);
-    if (c[start_p-1] == '-' && (c[start_p-2] == '(' || start_p == 1)){
-    	number[num_num] = -number[num_num];
-    	oper_num--;
-    }//ÈôÖ±½ÓÊäÈë¸ºÊı£¨ÌØÕ÷ÊÇ¸ººÅÇ°Îª×óÀ¨ºÅ£©£¬²»¿É°Ñ¸ººÅ´¦ÀíÎªÔËËã·û
-}
- 
-void get_operator(){//ÌáÈ¡·ûºÅ
-    oper[++oper_num] = c[p];
-    while (oper_num > 1 && oper[oper_num-1] != '(' 
-        && get_priority(oper_num) <= get_priority(oper_num-1)) calc(); 
-}
- 
-int get_priority(int n){//·µ»Øµ±Ç°·ûºÅÓÅÏÈ¼¶£¬À¨ºÅ×î´ó£¬³Ë³ı¡¢³Ë·½Æä´Î£¬×îºóÊÇ¼Ó¼õ
-    if (oper[n] == '+' || oper[n] == '-') return 0;
-    if (oper[n] == '*' || oper[n] == '/' || oper[n] == '^') return 1;
-    return 2;
-}
