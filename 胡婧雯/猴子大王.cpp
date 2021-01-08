@@ -1,33 +1,97 @@
-#include <stdio.h>
-void king(int m,int n)
+/*æ•°ç»„*/
+/*
+#include<stdio.h>
+int main()
 {
-    int p[999];
-    int i,j,t;
-    for (i=0; i<m; i++)         //¹¹½¨³õÊ¼ĞòÁĞ£¬¼ÇÂ¼mÖ»ºï×ÓÔÚÈ¦ÖĞ
-        p[i]=1;
-    t=0;                       //Ê×´Î±¨Êı½«´ÓÆğÊ¼Î»ÖÃÎª0£¬¼´µÚ1Ö»ºï×Ó¿ªÊ¼£¬ÒòÎªÔÚÊ¹ÓÃp[t]Ç°tÒª¼Ó1
-    printf("³öÁĞË³Ğò:");
-    for (i=1; i<=m; i++)        //Ñ­»·ÒªÖ´ĞĞm´Î£¬ÓĞm¸öºï×ÓÒª³öÈ¦
-    {
-        j=1;      // jÓÃÓÚ±¨Êı
-        while(j<=n)  //
-        {
-            t=(t+1)%m;        //¿´ÏÂÒ»Ö»ºï×Ó£¬µ½´ï×îºóÊ±ÒªÕÛ»ØÈ¥£¬ËùÒÔÓÃ%m
-            if (p[t]==1) j++; //µÈÍ¬ÓÚif (p[t]==1) j++;½öµ±qºï×ÓÔÚÈ¦ÖĞ£¬Õâ¸öÎ»ÖÃ²Å±¨Êı
-	}}
-for(i=0;i<m;i++)
+	int m,n,number,count=1;		//numberè®°çŒ´å­å‰©ä½™ä¸ªæ•°ï¼Œcountè®°å½“å‰æŠ¥æ•°
+	int monkey[999];
+	int t;						//tè®°æ•°ç»„ä¸‹æ ‡
+	int i;
+	printf("è¯·è¾“å…¥çŒ´å­ä¸ªæ•° m å’ŒæŠ¥æ•° n ï¼š");
+	scanf("%d%d",&m,&n);
+	number = m;
+	for(i=0;i<m;i++)
+		monkey[i]=i+1;
+	t=0;
+	while(number>1)
 	{
-		if(p[i]>0)
-			printf("ºï×Ó´óÍõ£º%d\n",p[i]);
+		if(monkey[t]>0)
+		{
+			if(count!=n)
+			{
+				count++;
+				t=(t+1)%m;		//å®ç°æ•°ç»„ä¸‹æ ‡åŠ 1ï¼Œé¿å…é‡æ–°æ‹å›å»æŠ¥æ•°
+			}
+			else
+			{
+				monkey[t]=0;
+				count=1;
+				number--;
+				t=(t+1)%m;
+			}
+		}
+		else
+		{
+			t=(t+1)%m;
+		}
+	}
+	for(i=0;i<m;i++)
+	{
+		if(monkey[i]>0)
+			printf("çŒ´å­å¤§ç‹ï¼š%d\n",monkey[i]);
 	}
 	return 0;
-   
 }
+*/
+/*é“¾è¡¨*/
+/*
+#include <iostream>
+using namespace std;
+struct Monkey
+{
+    int num;  //çŒ´å­çš„ç¼–å·
+    struct Monkey *next; //ä¸‹ä¸€åªçŒ´å­
+};
 
 int main()
 {
-    int m,n;
-    scanf("%d %d", &m, &n);
-    king(m,n);
+    int m,n,i,j,king;
+    Monkey *head, *p1,*p2;
+    cout<<"è¯·è¾“å…¥çŒ´å­ä¸ªæ•°må’ŒæŠ¥æ•°n: ";
+	 cin>>m>>n;
+    if(n==1)
+    { king=m;}
+    else
+    {  //å»ºç«‹çŒ´å­å›´æˆçš„åœ†åœˆ
+        p1=p2=new Monkey;
+        head = p1;
+        p1->num=1;
+        for(i=1; i<m; i++)  //å…¶ä½™m-1åªçŒ´å­
+        {
+            p1=new Monkey;  //p1æ˜¯æ–°å¢åŠ çš„
+            p1->num=i+1;
+            p2->next=p1;
+            p2=p1;          //p2æ€»æ˜¯ä¸Šä¸€åª
+        }
+        p2->next=head;      //æœ€åä¸€åªå†æŒ‡å‘ç¬¬ä¸€åªï¼Œæˆäº†ä¸€ä¸ªåœ†åœˆ
+        //å¼€å§‹å¯»æ‰¾çŒ´å¤§ç‹
+        p1=head;
+        for(i=1; i<m; i++)  //å¾ªç¯m-1æ¬¡ï¼Œæ·˜æ±°m-1åªçŒ´å­
+        {   //ä»p1å¼€å§‹ï¼Œæ•°n-1åªå°±æ‰¾åˆ°ç¬¬nåªäº†
+            for(j=1; j<n-1; j++)  //å…ˆæ‰¾åˆ°ç¬¬n-1åªï¼Œä¸‹ä¸€åªå°†æ˜¯è¢«æ·˜æ±°çš„
+            p1=p1->next;    //æŒ‡å‘å‰©ä½™å›´æˆåœˆçš„
+
+            //æ‰¾åˆ°çŒ´å¤§ç‹
+            p2=p1->next;  //p2å°†è¢«åˆ é™¤
+            p1->next=p2->next;  //p2ä¸ºç©º
+            p1=p2->next;  //ä¸‹ä¸€è½®æ•°çŒ´çš„æ–°èµ·ç‚¹
+            delete p2;  //å·²ä¸åœ¨é“¾è¡¨ï¼Œåˆ é™¤
+        }
+        king=p1->num;
+        delete p1;
+    }
+    cout<<"çŒ´å­å¤§ç‹: ";
+	cout<<king<<endl;
     return 0;
 }
+*/
