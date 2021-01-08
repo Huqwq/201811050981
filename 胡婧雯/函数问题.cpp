@@ -13,7 +13,7 @@ printf("结果为:%d",c);
 return 0;
 }
 
-/*指针传递*/
+/*引用传递*/
 /*
 #include<stdio.h>
   void fun(int a, int b, int &c)     
@@ -30,7 +30,7 @@ return 0;
 }
 */
 
-/*引用传递*/
+/*指针传递*/
 /*
 #include<stdio.h>
   void fun(int a, int b, int *c)     
